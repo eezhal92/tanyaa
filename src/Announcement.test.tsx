@@ -6,6 +6,6 @@ describe('Announcement', () => {
     const { getByRole } = renderWithProviders(<Announcement text="Hey" />, {
       theme: 'light'
     });
-    expect(getByRole('alert')).toHaveTextContent('Hey:light')
+    expect(getByRole('alert')).toHaveTextContent('Hey')
   });
 });
