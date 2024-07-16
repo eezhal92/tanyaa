@@ -7,6 +7,7 @@ import Prompt, { PromptPayload } from './components/Prompt'
 import QuestionItem from './components/QuestionItem'
 import { Question, User } from './types'
 import { useCallback, useMemo, useReducer, useState } from 'react'
+import Announcement from './Announcement'
 
 const store = setupStore()
 
@@ -109,6 +110,7 @@ function App() {
       return 0
     })
   }, [questions, sortBy])
+  const isAdmin = true;
 
   const handleVote = useCallback((id: string, voted: boolean) => {
     dispatch({
@@ -133,7 +135,8 @@ function App() {
   return (
     <div className="app">
       <Provider store={store}>
-        <ThemeProvider defaultTheme="light">
+        <ThemeProvider defaultTheme="dark">
+          <Announcement text="This is announcement example" />
           <Header />
           <Prompt onSubmit={handleAddQuestion}/>
           <div className="s-container">
