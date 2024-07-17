@@ -1,5 +1,5 @@
-import { Provider } from 'react-redux'
 import './App.css'
+import { Provider } from 'react-redux'
 import { ThemeProvider } from './context/ThemeContext'
 import { setupStore } from './store'
 import Header from './containers/Header'
@@ -10,38 +10,6 @@ import { useCallback, useMemo, useReducer, useState } from 'react'
 import Announcement from './Announcement'
 
 const store = setupStore()
-
-const mock: Question[] = [
-  {
-    id: '1',
-    content: 'What are the top resources B2B buyers are looking for from business in this climate?',
-    user: {
-      id: 1,
-      name: 'John',
-      email: 'john@gmail.com',
-    },
-    votes: 123,
-    createdAt: '2023-01-01T00:00:00.000Z'
-  },
-  {
-    id: '2',
-    content: 'What are some effective ways to improve traffic to our website?',
-    user: null,
-    votes: 80,
-    createdAt: '2023-01-02T00:00:00.000Z'
-  },
-  {
-    id: '3',
-    content: 'How can B2B marketers use quantum computing?',
-    user: {
-      id: 2,
-      name: 'Mike',
-      email: 'mike@gmail.com',
-    },
-    votes: 123,
-    createdAt: new Date().toISOString()
-  },
-]
 
 type UpvoteAction = {
   type: 'UPVOTE',
@@ -96,8 +64,7 @@ function questionsReducer(state: Question[], action: QuestionActions) {
 type SortKey = 'votes' | 'latest'
 
 function App() {
-  // const [questions] = useState<Question[]>(mock);
-  const [questions, dispatch] = useReducer(questionsReducer, mock)
+  const [questions, dispatch] = useReducer(questionsReducer, [])
   const [votedQuestionIds, setVotedQuestionIds] = useState<string[]>([])
 
   const [sortBy, setSortBy] = useState<SortKey>('votes');
@@ -110,7 +77,6 @@ function App() {
       return 0
     })
   }, [questions, sortBy])
-  const isAdmin = true;
 
   const handleVote = useCallback((id: string, voted: boolean) => {
     dispatch({

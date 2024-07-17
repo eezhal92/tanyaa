@@ -73,7 +73,7 @@ export default function QuestionItem({
         <p className="mb-1 text-gray-400 text-sm">
           {question.user?.name ?? "Anonymous"}
         </p>
-        <p>{question.content}</p>
+        <p data-testid="question-title">{question.content}</p>
       </div>
     </div>
   );
