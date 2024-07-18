@@ -1,6 +1,4 @@
 import { ChangeEventHandler, FormEventHandler, useCallback, useMemo, useState } from "react"
-import { useAppSelector } from "../store";
-import { authSelectors } from "../store/auth.slice";
 import { User } from "../types";
 
 const maxChar = 192;
@@ -12,11 +10,11 @@ function isQuestionLengthValid(question: string) {
 export type PromptPayload = { user: User | null, question: string }
 
 type PromptProps = {
+  user: User | null,
   onSubmit: (payload: PromptPayload) => void,
 }
 
-export default function Prompt({ onSubmit }: PromptProps) {
-  const user = useAppSelector(authSelectors.selectUser);
+export default function Prompt({ user, onSubmit }: PromptProps) {
   const [expanded] = useState<boolean>(true);
 
   const [question, setQuestion] = useState<string>('');

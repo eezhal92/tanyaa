@@ -1,5 +1,5 @@
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
-import QnAPage from "./qna/QnAPage";
+import QnAPage from "./modules/qna/QnAPage";
 
 const router = createBrowserRouter([
   {

@@ -1,19 +1,18 @@
-import Prompt, { PromptPayload } from '../components/Prompt'
-import { useCallback, useMemo, useReducer, useState } from 'react'
-import Announcement from '../Announcement'
-import Header from '../containers/Header'
-import QuestionItem from '../components/QuestionItem'
-import { useAppDispatch, useAppSelector } from '../store'
-import { qnaSelectors, qnaSlice } from '../store/qna.slice'
-
-
+import Prompt, { PromptPayload } from '../../components/Prompt'
+import { useCallback, useMemo, useState } from 'react'
+import Announcement from '../../components/Announcement'
+import Header from '../../containers/Header'
+import QuestionItem from '../../components/QuestionItem'
+import { useAppDispatch, useAppSelector } from '../../store'
+import { qnaSelectors, qnaSlice } from '../../store/qna.slice'
+import { authSelectors } from '../../store/auth.slice'
 
 // example: https://pigeonhole.at/HELLODIGITAL/q/3138787
 
 type SortKey = 'votes' | 'latest'
 
 function QnAPage() {
-  // const [questions, dispatch] = useReducer(questionsReducer, [])
+  const user = useAppSelector(authSelectors.selectUser);
   const questions = useAppSelector(qnaSelectors.selectQuestions);
   const dispatch = useAppDispatch();
   const [votedQuestionIds, setVotedQuestionIds] = useState<string[]>([])
@@ -23,8 +22,8 @@ function QnAPage() {
     return questions.slice().sort((a, b) => {
       if (sortBy === 'votes') return b.votes - a.votes;
 
-      if (b.createdAt > a.createdAt) return -1
-      if (b.createdAt < a.createdAt) return 1
+      if (b.createdAt < a.createdAt) return -1
+      if (b.createdAt > a.createdAt) return 1
       return 0
     })
   }, [questions, sortBy])
@@ -54,7 +53,7 @@ function QnAPage() {
     <div>
         <Announcement text="This is announcement example" />
         <Header />
-        <Prompt onSubmit={handleAddQuestion}/>
+        <Prompt user={user} onSubmit={handleAddQuestion}/>
         <div className="s-container">
           <div className="flex justify-between py-2">
             <select className="bg-transparent">

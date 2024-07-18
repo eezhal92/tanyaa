@@ -1,6 +1,6 @@
-import { useTheme } from "./context/ThemeContext";
+import { useTheme } from "../context/ThemeContext";
 import { styled, css } from 'styled-components';
-import { AppTheme } from "./theme";
+import { AppTheme } from "../theme";
 
 
 const Wrapper = styled.div<{ theme: AppTheme }>`

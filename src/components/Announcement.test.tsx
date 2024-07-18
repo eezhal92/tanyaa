@@ -1,4 +1,4 @@
-import { renderWithProviders } from '../tests/util';
+import { renderWithProviders } from '../../tests/util';
 import Announcement from './Announcement';
 
 describe('Announcement', () => {
