@@ -1,5 +1,7 @@
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import QnAPage from "./modules/qna/QnAPage";
+import SettingsRootPage from "./modules/settings/SettingsRootPage";
+import ProfilePage from "./modules/settings/ProfilePage";
 
 const router = createBrowserRouter([
   {
@@ -13,6 +15,16 @@ const router = createBrowserRouter([
       {
         path: ':tenant/q/:qid',
         element: <QnAPage />
+      },
+      {
+        path: 'settings',
+        element: <SettingsRootPage />,
+        children: [
+          {
+            path: 'profile',
+            element: <ProfilePage />
+          }
+        ]
       },
       {
         path: '*',

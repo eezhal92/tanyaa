@@ -15,7 +15,7 @@ const userService = {
   }
 } as const
 
-export default function User() {
+export default function ProfilePage() {
   const [isFetching, setFetching] = useState<boolean>(false);
   const [user, setUser] = useState<AppUser | null>(null)
 

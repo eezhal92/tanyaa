@@ -1,7 +1,7 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import { http, delay, HttpResponse } from "msw"
 import { setupServer } from "msw/node"
-import User from './User'
+import ProfilePage from './ProfilePage'
 
 export const handlers = [
   http.get('https://jsonplaceholder.typicode.com/users/1', async () => {
@@ -25,9 +25,9 @@ afterEach(() => server.resetHandlers())
 // Disable API mocking after the tests are done.
 afterAll(() => server.close())
 
-describe('Counter', () => {
+describe('ProfilePage', () => {
   it('render todo', async () => {
-    render(<User />)
+    render(<ProfilePage />)
     // should show no user initially, and not be fetching a user
     expect(screen.getByText(/no user/i)).toBeInTheDocument()
     expect(screen.queryByText(/Fetching user\.\.\./i)).not.toBeInTheDocument()
