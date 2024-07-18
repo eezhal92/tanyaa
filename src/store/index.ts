@@ -2,10 +2,12 @@ import { PreloadedState, combineReducers, configureStore } from "@reduxjs/toolki
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import { orderSlice } from "./order.slice";
 import { authSlice } from "./auth.slice";
+import { qnaSlice } from "./qna.slice";
 
 const rootReducer = combineReducers({
   order: orderSlice.reducer,
   auth: authSlice.reducer,
+  qna: qnaSlice.reducer,
 })
 
 export type RootState = ReturnType<typeof rootReducer>
