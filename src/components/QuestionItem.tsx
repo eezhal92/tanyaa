@@ -54,7 +54,7 @@ export default function QuestionItem({
   onVote,
 }: QuestionItemProps) {
   return (
-    <div className="bg-white p-4 flex" data-created-at={question.createdAt}>
+    <div data-testid="question-item" className="bg-white p-4 flex" data-created-at={question.createdAt}>
       <div className="" style={{ flexBasis: 60 }}>
         <div className="text-center">
           <button

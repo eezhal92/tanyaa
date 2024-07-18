@@ -60,7 +60,7 @@ function QnAPage() {
               <option value="">All Questions({questions.length})</option>
             </select>
             <label>
-              <select className="bg-transparent" onChange={(e) => setSortBy(e.target.value as SortKey)}>
+              <select aria-label="sort" name="sort" className="bg-transparent" onChange={(e) => setSortBy(e.target.value as SortKey)}>
                 <option value="votes">Top voted</option>
                 <option value="latest">Latest</option>
               </select>
