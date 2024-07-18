@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from ".";
-import { User } from "../types";
+import { User, UserRole } from "../types";
 
 type AuthState = {
   user: User | null
@@ -10,7 +10,8 @@ const initialState: AuthState = {
   user: {
     id: 1,
     name: 'Foobar',
-    email: 'foobar@gmail.com'
+    email: 'foobar@gmail.com',
+    role: UserRole.Tenant,
   }
 }
 

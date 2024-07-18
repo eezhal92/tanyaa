@@ -4,22 +4,15 @@ import QnAPage from './QnAPage';
 import userEvent from "@testing-library/user-event";
 
 describe('QnAPage', () => {
-  it('render in correct order', async () => {
+  it('able to add question', async () => {
     const questions: Question[] = [
       {
         id: '1',
         votes: 1,
-        content: 'First qns',
+        content: 'Default qns',
         user: null,
         createdAt: new Date('2024-01-01').toISOString(),
       },
-      {
-        id: '2',
-        votes: 0,
-        content: 'Second qns',
-        user: null,
-        createdAt: new Date('2024-01-02').toISOString(),
-      }
     ]
     const { queryAllByTestId, getByRole } = renderWithProviders(<QnAPage  />, {
       preloadedState: { qna: { questions } }
@@ -27,17 +20,16 @@ describe('QnAPage', () => {
 
     // default order is by votes
     let element = queryAllByTestId('question-item');
-    expect(element.length).toBe(2);
-    expect(element.at(0)).toHaveTextContent('First qns');
-    expect(element.at(1)).toHaveTextContent('Second qns');
+    expect(element.length).toBe(1);
+    expect(element.at(0)).toHaveTextContent('Default qns');
 
-    // change order by latest
     const user = userEvent.setup()
-    await user.selectOptions(getByRole("combobox", { name: 'sort' }), "latest");
+    await user.type(getByRole('textbox'), 'New question')
+    await user.click(getByRole('button', { name: 'Ask' }))
 
     element = queryAllByTestId('question-item');
     expect(element.length).toBe(2);
-    expect(element.at(0)).toHaveTextContent('Second qns');
-    expect(element.at(1)).toHaveTextContent('First qns');
+    expect(element.at(0)).toHaveTextContent('Default qns');
+    expect(element.at(1)).toHaveTextContent('New question');
   });
 });
