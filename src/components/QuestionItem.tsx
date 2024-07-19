@@ -54,10 +54,11 @@ export default function QuestionItem({
   onVote,
 }: QuestionItemProps) {
   return (
-    <div data-testid="question-item" className="bg-white p-4 flex" data-created-at={question.createdAt}>
+    <div data-testid="question-item" data-voted={isVoted ? "true" : "false"} className="bg-white p-4 flex" data-created-at={question.createdAt}>
       <div className="" style={{ flexBasis: 60 }}>
         <div className="text-center">
           <button
+            aria-label="vote-button"
             className="cursor-pointer inline-block"
             style={{ width: 32, height: 32 }}
             onClick={() => {
@@ -66,7 +67,7 @@ export default function QuestionItem({
           >
             <VoteIcon isVoted={isVoted} />
           </button>
-          <p className="font-bold">{question.votes}</p>
+          <p data-testid="vote-count" className="font-bold">{question.votes}</p>
         </div>
       </div>
       <div>

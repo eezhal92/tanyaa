@@ -12,8 +12,8 @@ import QuestionList from './QuestionList'
 function QnAPage() {
   const user = useAppSelector(authSelectors.selectUser);
   const questions = useAppSelector(qnaSelectors.selectQuestions);
+  const votedQuestionIds = useAppSelector(qnaSelectors.selectVotedQuestionIds);
   const dispatch = useAppDispatch();
-  const [votedQuestionIds, setVotedQuestionIds] = useState<string[]>([])
 
   const handleVote = useCallback((id: string, voted: boolean) => {
     if (voted) {
@@ -21,13 +21,6 @@ function QnAPage() {
     } else {
       dispatch(qnaSlice.actions.downvote({ id }))
     }
-
-    if (voted) {
-      setVotedQuestionIds(questionIds => questionIds.concat(id))
-      return
-    }
-
-    setVotedQuestionIds(questionIds => questionIds.filter(questionId => questionId !== id))
   }, []);
 
   const handleAddQuestion = useCallback((payload: PromptPayload) => {
